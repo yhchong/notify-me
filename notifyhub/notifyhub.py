@@ -1,4 +1,5 @@
 import inspect
+import requests
 import os
 from notifyhub.messengers import telegram
 from functools import wraps
@@ -51,6 +52,15 @@ def send_message(message, messenger, source_file=None, **kwargs):
         return False
     return True
 
+
+def get_chat_id(bot_token):
+    url = f"https://api.telegram.org/bot{bot_token}/getUpdates"
+    response = requests.get(url)
+    try:
+        chat_id = response.json()['result'][0]['message']['chat']['id']
+    except IndexError:
+        raise Exception('No chat_id found. Please send a message to your bot first.')
+    return str(chat_id)
 
 def _handle_exception(message, messenger):
     print('ERROR: Message {} failed to be send'.format(message, messenger))

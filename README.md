@@ -6,10 +6,10 @@ finished processing! I use this extensive for code with long processing time.
 # Usage
 ```python
 from notifyhub.messengers.telegram import send_message
-from notifyhub.notifyhub import watch
+from notifyhub.notifyhub import watch, get_chat_id
 
-CHAT_ID = '238741623'
 BOT_TOKEN = '1386719865:AAG1pim7Di8pUOJYOgh_tUMLGTLI2BPHk9Q'
+CHAT_ID = get_chat_id(BOT_TOKEN)
 
 
 # send a 'hello' message via telegram
@@ -34,7 +34,8 @@ Search for BotFather in telegram and use the following commands to create the bo
 
 1. Search and open our new Telegram bot
 2. Click Start or send a message
-3. Open this URL in a browser https://api.telegram.org/bot{our_bot_token}/getUpdates
+3a. Get chat_id via get_chat_id(BOT_TOKEN) or
+3b. Open this URL in a browser https://api.telegram.org/bot{our_bot_token}/getUpdates
 
     See we need to prefix our token with a "bot"
     Eg: https://api.telegram.org/bot63xxxxxx71:AAFoxxxxn0hwA-2TVSxxxNf4c/getUpdates
